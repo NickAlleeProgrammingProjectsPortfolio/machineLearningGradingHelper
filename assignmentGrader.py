@@ -30,7 +30,7 @@ userNameToRealName = {"ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula
                       ,"nikithamandala":"Nikitha Mandala","rajeshoo7":"Rajesh Kammari","ravikumaratluri":"Ravi Kumar Atluri","reddylavanya":"Lavanya Reddy Uppula"
                       ,"redhug":"Pavan Kumar Reddy Byreddy","rishikareddygaddam":"Rishika Reddy Gaddam","rohithbharadwaj":"Rohith Bharadwaj","RudraPotturi":"Rudra Teja Potturi","Saikiran5669":"Sai Kiran Reddy Baki"
                       ,"saikirandd":"Sai Kiran Doddapaneni","sanjanabaswa":"Sanjana Baswapuram","SravyaKatpally":"Sravya Katpally","sunilmundru":"Sunil Mundru","Sushma4548":"Sushma Rani Reddy Aleti"
-                      ,"vamshiredd":"Vamshikrishna Reddy Yedalla","venkateshkunduru123":"Venkatesh Kunduru","vinusha09":"Vinusha Sandadi"
+                      ,"vamshiredd":"Vamshikrishna Reddy Yedalla","venkateshkunduru123":"Venkatesh Kunduru","vinusha09":"Vinusha Sandadi","SaiNikhilPippara" : "Sai Nikhil Pippara"
                       }
 
 assignmentName = sys.argv[1]
@@ -74,7 +74,7 @@ for folder in sorted(os.listdir()):
         sheet = wb["Sheet"]
         flag = 0
     except:
-        print("couldnt change into: " + p + "/" + folder)
+        print("couldnt change into: " + p + "/" + folder )
         flag = 1
     
     
@@ -83,7 +83,7 @@ for folder in sorted(os.listdir()):
         for point in points:
             """check to see if the grade is an actual grade. if not then ask again. do this with regex"""
             
-            grade = pyip.inputNum("please enter the grade for  part" + str(count) + ". The max score for this part is :" + str(point) +".", min = 0 , max =point )
+            grade = pyip.inputNum("please enter the grade for  part" + str(count) + ". The max score for this part is :" + str(point) +".", min = 0 , max =int(point) )
             
             grades.append(grade)
             #set the grade of the correct section
@@ -108,7 +108,8 @@ for folder in sorted(os.listdir()):
         #save and close the excel file
         wb.save(filename = folder +assignmentName+ "Grade.xlsx")
         wb.close()
-    
+    else:
+        print("didnt do anything this round")
     
 
 scorefile = open("studentScores.txt","w")
