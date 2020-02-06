@@ -63,9 +63,9 @@ for folder in os.listdir():
                 sheet["A"+str(count)] = "correct amt of commits"
             count+=1
         #save the extra credit
-        ecSpot = totalList[len(totalList)-3:]
+        ecSpot = totalList[len(totalList)-4:]
         #this line removes the plus at the beginning and the last 3 chars which is the extracredit
-        totalList = totalList[1:len(totalList)-3]
+        totalList = totalList[1:len(totalList)-4]
         #adding the total at the end for the points possible
         sheet["C"+str(count)] = "="+totalList
         #re-add the ecSpot
