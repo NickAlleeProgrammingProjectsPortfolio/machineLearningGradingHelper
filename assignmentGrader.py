@@ -21,7 +21,7 @@ if not
 
 @author: nick
 """
-import os, openpyxl, sys
+import os, openpyxl, sys, pyinputplus as pyip
 
 #a dictionary linking the github name to the student name
 userNameToRealName = {"ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula"
@@ -32,7 +32,6 @@ userNameToRealName = {"ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula
                       ,"saikirandd":"Sai Kiran Doddapaneni","sanjanabaswa":"Sanjana Baswapuram","SravyaKatpally":"Sravya Katpally","sunilmundru":"Sunil Mundru","Sushma4548":"Sushma Rani Reddy Aleti"
                       ,"vamshiredd":"Vamshikrishna Reddy Yedalla","venkateshkunduru123":"Venkatesh Kunduru","vinusha09":"Vinusha Sandadi"
                       }
-
 
 assignmentName = sys.argv[1]
 points = list(sys.argv[2].strip("[").strip("]").split(","))
@@ -83,15 +82,17 @@ for folder in sorted(os.listdir()):
     if flag == 0:
         for point in points:
             """check to see if the grade is an actual grade. if not then ask again. do this with regex"""
-            grade = input("please enter the grade for  part" + str(count) + ". The max score for this part is :" + str(sheet["B"+str(row)]) +".")
+            
+            grade = pyip.inputNum("please enter the grade for  part" + str(count) + ". The max score for this part is :" + str(point) +".", min = 0 , max =point )
+            
             grades.append(grade)
             #set the grade of the correct section
             sheet["B"+str(row)] = int(grade)
             #print confirmation
-            print("part " + str(count) +" set to " + grade)
+            print("part " + str(count) +" set to " + str(grade))
             #if points are missed then ask for a reason
             if float(grade) != float(point):
-                reason = input("what is the reason for deducting points?")
+                reason = pyip.inputStr("what is the reason for deducting points?")
                 #insert the reason
                 sheet["D"+str(row)] = reason
             #increment row and count
