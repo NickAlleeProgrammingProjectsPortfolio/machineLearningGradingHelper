@@ -23,6 +23,20 @@ if not
 """
 import os, openpyxl, sys, pyinputplus as pyip
 
+
+def append_new_line(file_name, text_to_append):
+        """Append given text as a new line at the end of file"""
+        # Open the file in append & read mode ('a+')
+        with open(file_name, "a+") as file_object:
+        # Move read cursor to the start of file.
+            file_object.seek(0)
+        # If file is not empty then append '\n'
+            data = file_object.read(100)
+            if len(data) > 0:
+                file_object.write("\n")
+        # Append text at the end of file
+            file_object.write(text_to_append)
+
 #a dictionary linking the github name to the student name
 userNameToRealName = {"ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula"
                       ,"bollamharshavardhanreddy":"Harshavardhan Reddy Bollam","chaturkurma":"Chatur Veda Vyas Kurma","dakotagrvtt":"Dakota Gravitt","Druthi7":"Sharadruthi Beerkuri","Echtniet":"Clinton Davelaar"
@@ -68,7 +82,7 @@ for folder in sorted(os.listdir()):
         #go into that folder and load the excel file for writing
         os.chdir(p + "/" + folder)
         #print out the student name and assignment name
-        print("********************************" + userNameToRealName[folder] + "********************************\n\n")
+        print("********************************" + userNameToRealName[folder] + "*******"+folder+"*************************\n\n")
         #load the excel file
         wb = openpyxl.load_workbook(folder + assignmentName + "Grade.xlsx")
         sheet = wb["Sheet"]
@@ -81,9 +95,10 @@ for folder in sorted(os.listdir()):
     # for each section it will take in a grade.
     if flag == 0:
         for point in points:
+            intPoint = int(float(point))
             """check to see if the grade is an actual grade. if not then ask again. do this with regex"""
             
-            grade = pyip.inputNum("please enter the grade for  part" + str(count) + ". The max score for this part is :" + str(point) +".", min = 0 , max =int(point) )
+            grade = pyip.inputNum("please enter the grade for  part" + str(count) + ". The max score for this part is :" + str(point) +".", min = 0 , max =intPoint)
             
             grades.append(grade)
             #set the grade of the correct section
@@ -105,16 +120,20 @@ for folder in sorted(os.listdir()):
         print("the total score for " + userName + " is " + str(total))
         #save the students name and score into a dictionary then print it out at the end
         studentScores[userNameToRealName[userName]] = total
+        os.chdir(p)
+        scorefile = open("studentScores.txt","a")
+        append_new_line("studentScores.txt", str(userNameToRealName[userName]) + "---scored---" + str(total))
+        
+        scorefile.close()
+        os.chdir(p + "/" + folder)
         #save and close the excel file
         wb.save(filename = folder +assignmentName+ "Grade.xlsx")
         wb.close()
     else:
         print("didnt do anything this round")
     
-
-scorefile = open("studentScores.txt","w")
+scorefile = open("studentScores.txt","r")
 
 for key,value in sorted(studentScores.items()):
-    print(key + "---scored---" + value)
-    scorefile.write(key + "---scored---" + value + "/n")
+    print(str(key) + "---scored---" + str(value))
 scorefile.close()
