@@ -66,6 +66,8 @@ for folder in os.listdir():
         ecSpot = totalList[len(totalList)-3:]
         #this line removes the plus at the beginning and the last 3 chars which is the extracredit
         totalList = totalList[1:len(totalList)-3]
+        if totalList[len(totalList)] == "+":
+            totalList = totalList[0:len(totalList)-1]
         #adding the total at the end for the points possible
         sheet["C"+str(count)] = "="+totalList
         #re-add the ecSpot
