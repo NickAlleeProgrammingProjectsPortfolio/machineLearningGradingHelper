@@ -7,7 +7,7 @@ Created on Sun Feb  9 15:33:22 2020
 """
 
 
-import os, openpyxl, sys, pyinputplus as pyip
+import os, openpyxl, sys, pyinputplus as pyip, pandas as pd
 
 def addExtraCredit(points):
     pointTotal = 0
@@ -18,7 +18,8 @@ def addExtraCredit(points):
     return points
 
 def writeToScoresList(name,score):
-    append_new_line("studentScores.txt", name + "\t" + str(score))
+    append_new_line("studentScores.txt", name + "\t\t\t" + str(score))
+    scoreDfList.append([name,score])
     return None
 
 
@@ -83,7 +84,7 @@ class studentScore:
 
 
 
-
+scoreDfList = []
 userNameToRealName = {"ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula"
                       ,"bollamharshavardhanreddy":"Harshavardhan Reddy Bollam","chaturkurma":"Chatur Veda Vyas Kurma","dakotagrvtt":"Dakota Gravitt","Druthi7":"Sharadruthi Beerkuri","Echtniet":"Clinton Davelaar"
                       ,"ForeverAnApple":"Dave Chen","halfnote":"Trick Rex","JaswanthiNannuru":"Jaswanthi Nannuru","KHart0012":"Kevin Hart","kiyuzi":"Paige Braymer"
@@ -124,7 +125,11 @@ for folder in sorted(os.listdir()):
         os.chdir(p)
         ##write student score to txt file
         writeToScoresList(studentScores[count].name,studentScores[count].total)
+        ## increase the count
         count += 1
+
+df = pd.DataFrame(scoreDfList,columns = ['Name','Score'])
+print(df.to_markdown())
 
 print("Finished Grading All Assignments... Goodbye")  
 #done
