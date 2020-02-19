@@ -104,19 +104,27 @@ points = addExtraCredit(points)
 # itterate thru folders
 for folder in sorted(os.listdir()):
     ## cd into that directory
-    os.chdir(p + "/" + folder)
-    ## new studentscore class with init
-    studentScoreX = studentScore(userNameToRealName[folder],folder,folder + assignmentName + "Grade.xlsx")
-    ## add the student to the studentScores list
-    studentScores.append(studentScoreX)
-    ##print the studentscores name and gitname
-    print(studentScores[count].name + "   *******    "  + studentScores[count].githubName)
-    ## grade the students excel file(points)
-    studentScores[count].gradeAssignment(points)
-    ##cd out of the directory
-    os.chdir(p)
-    ##write student score to txt file
-    writeToScoresList(studentScores[count].name,studentScores[count].total)
+    do = 0
+    try:
+        os.chdir(p + "/" + folder)
+        do = 1
+    except Exception as e:
+        print(e)
+        print("didnt do anything this round.")
+    if (do == 1):
+        ## new studentscore class with init
+        studentScoreX = studentScore(userNameToRealName[folder],folder,folder + assignmentName + "Grade.xlsx")
+        ## add the student to the studentScores list
+        studentScores.append(studentScoreX)
+        ##print the studentscores name and gitname
+        print(studentScores[count].name + "   *******    "  + studentScores[count].githubName)
+        ## grade the students excel file(points)
+        studentScores[count].gradeAssignment(points)
+        ##cd out of the directory
+        os.chdir(p)
+        ##write student score to txt file
+        writeToScoresList(studentScores[count].name,studentScores[count].total)
+        count += 1
 
 print("Finished Grading All Assignments... Goodbye")  
 #done

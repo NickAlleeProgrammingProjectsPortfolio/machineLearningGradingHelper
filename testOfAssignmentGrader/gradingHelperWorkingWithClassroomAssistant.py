@@ -36,8 +36,14 @@ points.append(str(extraCreditPoint))
 
 for folder in os.listdir():
     #change into the students directory
+    do = 0
     try:
         os.chdir(p+"/"+folder)
+        do = 1
+    except Exception as e:
+        print(e)
+        print("could not change into that directory.")
+    if (do == 1):
         print(folder)
         #make students excel document
         wb = openpyxl.Workbook()
@@ -48,7 +54,7 @@ for folder in os.listdir():
         sheet['C2'] = "points possible"
         sheet['D2'] = "reason"
         sheet['E2'] = "percent"
- 
+     
         
         count = 3
         totalList = ""
@@ -66,7 +72,7 @@ for folder in os.listdir():
         ecSpot = totalList[len(totalList)-3:]
         #this line removes the plus at the beginning and the last 3 chars which is the extracredit
         totalList = totalList[1:len(totalList)-3]
-        if totalList[len(totalList)] == "+":
+        if totalList[len(totalList)-1] == "+":
             totalList = totalList[0:len(totalList)-1]
         #adding the total at the end for the points possible
         sheet["C"+str(count)] = "="+totalList
@@ -88,9 +94,7 @@ for folder in os.listdir():
         #empty wb
         wb = None
         print(str(folder) + "'s Excel file made.")
-    except:
-        print(folder)
-        print("could not change into that directory.")
+        
     
         
 print("finnished making Excel files for all students")
