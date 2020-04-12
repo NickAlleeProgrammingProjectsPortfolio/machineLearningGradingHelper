@@ -131,7 +131,7 @@ for folder in sorted(os.listdir()):
         wb.close()
     else:
         print("didnt do anything this round")
-oschdir(p)    
+os.chdir(p)    
 scorefile = open("studentScores.txt","r")
 
 for key,value in sorted(studentScores.items()):

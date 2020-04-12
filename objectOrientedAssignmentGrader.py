@@ -85,7 +85,7 @@ class studentScore:
 
 
 scoreDfList = []
-userNameToRealName = {"ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula"
+userNameToRealName = {"chitralekhach":"Chitralekha Chikku","HarshithGudapati":"Harshith Gudapati","ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula"
                       ,"bollamharshavardhanreddy":"Harshavardhan Reddy Bollam","chaturkurma":"Chatur Veda Vyas Kurma","dakotagrvtt":"Dakota Gravitt","Druthi7":"Sharadruthi Beerkuri","Echtniet":"Clinton Davelaar"
                       ,"ForeverAnApple":"Dave Chen","halfnote":"Trick Rex","JaswanthiNannuru":"Jaswanthi Nannuru","KHart0012":"Kevin Hart","kiyuzi":"Paige Braymer"
                       ,"nikithamandala":"Nikitha Mandala","rajeshoo7":"Rajesh Kammari","ravikumaratluri":"Ravi Kumar Atluri","reddylavanya":"Lavanya Reddy Uppula"
