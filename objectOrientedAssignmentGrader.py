@@ -4,6 +4,14 @@
 Created on Sun Feb  9 15:33:22 2020
 
 @author: nick
+
+
+
+
+this program should know where its at. im going to put in a check so if the student has already been graded then it will skip that student.
+
+
+
 """
 
 
@@ -82,8 +90,6 @@ class studentScore:
 
 
 
-
-
 scoreDfList = []
 userNameToRealName = {"chitralekhach":"Chitralekha Chikku","HarshithGudapati":"Harshith Gudapati","ppusap":"Pratyusha Pusapati","Chaitra543":"Chaitra Vemula"
                       ,"bollamharshavardhanreddy":"Harshavardhan Reddy Bollam","chaturkurma":"Chatur Veda Vyas Kurma","dakotagrvtt":"Dakota Gravitt","Druthi7":"Sharadruthi Beerkuri","Echtniet":"Clinton Davelaar"
@@ -112,6 +118,12 @@ for folder in sorted(os.listdir()):
     except Exception as e:
         print(e)
         print("didnt do anything this round.")
+    '''if the folder to real name is in the studentscores text file then set do == 0 '''
+    with open('studentScores.txt') as file:
+    	contents = file.read()
+    	search_word = userNameToRealName[folder]
+	if search_word in contents:
+		do == 0
     if (do == 1):
         ## new studentscore class with init
         studentScoreX = studentScore(userNameToRealName[folder],folder,folder + assignmentName + "Grade.xlsx")
